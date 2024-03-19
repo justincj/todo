@@ -15,56 +15,96 @@ when it reaches zero task is eliminated whether you do it or not.
     }
 
     function destroy(){
+        alert("self destruct")
         console.log('self destruct')
         tasks = tasks.pop()
         tasks = tasks;
     }
     function addTask(){
-        tasks = [...tasks, inputValue]
+        tasks = [...tasks, {index:tasks.length, inputValue}]
         inputValue=""
+    }
+
+    function handleMessage(event){
+       tasks=tasks.filter(task=>task.index!=event.detail.index)
+       console.log(tasks)
     }
 </script>
 <div class="container">
-    <h1>Self Destructing Todo</h1>
-    <h3>Add the item you want to do for next one hour. it will delte itself after 1 hour</h3>
-    <div>
+    <header>
+        <h1>SELFDESTRUCT COUNTDOWN</h1>
+        <p>Add a task and It will self destruct in 1 hour</p>
+    </header>
+    <main>
+    <div class="addTask">
         <input on:keydown={handleKeyDown} bind:value={inputValue} placeholder="add task"/>
         <button on:click={addTask}>submit</button>
     </div>
     <ul class="list">
-        {#each tasks as task}
-            <li>
-             <div on:message={destroy} class="wrap">
-                <span>{task}</span>
-                <span on:message><Timer/></span>
+        {#each tasks as task, index}
+            <li class="list-item">
+             <div class="wrap">
+                <span>{task.inputValue}</span>
+                <span><Timer index={index} on:message={handleMessage}/></span>
              </div>
         {/each}
     </ul>
+    </main>
 </div>
 <style>
-.container {
-	margin: 0;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	background-color: #03031c;
-	min-height: 100vh;
-}
-    .wrap {
-        display: flex;
-        gap:2em;
-    }
-    h1, h3, ul {
-        color:white;
-    }
 
-    h1 {
-        margin-bottom: 3px;
-    }
-    h3 {
-        margin-top:0;
-    }
-    .list {
-        list-style: none;
-    }
+:global(body) {
+    background:#dce1f8;
+	min-height: 100vh;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+header {
+    color: black;
+    /* background:#ddedfa; */
+    margin:0 auto;
+    width: 70%;
+    /* border: 4px solid #4dabf7; */
+    text-align: center;
+}
+
+main {
+    margin-top:2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.addTask {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap:30px;
+    padding:2rem;
+    background:#ddedfa;
+    border: 4px solid #4dabf7;
+    border-radius: 10px;
+    width:70%;
+}
+
+.list {
+    padding:0;
+    list-style: none;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+    text-transform: uppercase;
+}
+
+.list-item {
+    background:#eedbe2;
+    font-size: 2rem;
+    width: 100%;
+    border:4px solid #f5a0a6;
+    border-radius: 10px;
+    margin-left:0;
+}
+
+
 </style>
