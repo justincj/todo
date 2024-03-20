@@ -46,6 +46,11 @@
     font-family: 'Courier New', Courier, monospace;
 }
 
+.container {
+    max-width: 800px;
+    margin:0 auto;
+}
+
 header {
     color: black;
     /* background:#ddedfa; */
