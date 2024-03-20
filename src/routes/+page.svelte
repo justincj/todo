@@ -1,6 +1,4 @@
 <script>
-    import {flip} from "svelte/animate"
-    import {fade} from "svelte/transition"
     import "$lib/styles/style.css"
     import Timer from "$lib/components/Timer.svelte"
     let tasks = [];
@@ -24,7 +22,7 @@
 <div class="container">
     <header>
         <h1>SELFDESTRUCT COUNTDOWN</h1>
-        <p>Add a task and It will self destruct in 1 hour</p>
+        <p>Add a task and It will self destruct in exactly 1 hour</p>
     </header>
     <main>
     <div  class="addTask">
