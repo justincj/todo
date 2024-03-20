@@ -32,7 +32,8 @@
     <ul class="list">
         {#each tasks as task (task.start)}
             <li class="list-item">
-                <span>{task.inputValue.trim()}  <Timer start={task.start} on:message={handleMessage}/></span>
+                <span>{task.inputValue.trim()} </span>
+                <span>  <Timer start={task.start} on:message={handleMessage}/></span>
              </li>
         {/each}
     </ul>
@@ -50,6 +51,7 @@
     max-width: 800px;
     margin:0 auto;
 }
+
 
 header {
     color: black;
@@ -86,16 +88,18 @@ main {
     display: flex;
     flex-direction: column;
     gap:5px;
-    text-transform: uppercase;
+
 }
 
 .list-item {
     background:#eedbe2;
-    font-size: 2rem;
+    font-size: 1.2rem;
     width: 100%;
     border:4px solid #f5a0a6;
     border-radius: 10px;
     margin-left:0;
+    display: flex;
+    justify-content: space-around;
 }
 
 

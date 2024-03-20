@@ -15,5 +15,5 @@
   }, 1000);
 </script>
 <span>
-    {Math.floor((countdownTime % 3600) / 60).toString()}:{countdownTime % 60 > 0 ? String(countdownTime % 60).padStart(2, 0):""}
+    {Math.floor((countdownTime % 3600) / 60).toString()}:{String(countdownTime % 60).padStart(2, 0)}
 </span>
