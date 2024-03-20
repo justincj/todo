@@ -32,10 +32,7 @@
     <ul class="list">
         {#each tasks as task (task.start)}
             <li class="list-item">
-             <div class="wrap">
-                <span>{task.inputValue}</span>
-                <span><Timer start={task.start} on:message={handleMessage}/></span>
-             </div>
+                <span>{task.inputValue.trim()}  <Timer start={task.start} on:message={handleMessage}/></span>
              </li>
         {/each}
     </ul>
