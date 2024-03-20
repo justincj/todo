@@ -4,6 +4,8 @@ each li has a timer which countdown from t-60
 when it reaches zero task is eliminated whether you do it or not.
 -->
 <script>
+    import {flip} from "svelte/animate"
+    import {fade} from "svelte/transition"
     import "$lib/styles/style.css"
     import Timer from "$lib/components/Timer.svelte"
     let tasks = [];
@@ -36,13 +38,13 @@ when it reaches zero task is eliminated whether you do it or not.
         <p>Add a task and It will self destruct in 1 hour</p>
     </header>
     <main>
-    <div class="addTask">
+    <div  class="addTask">
         <input on:keydown={handleKeyDown} bind:value={inputValue} placeholder="add task"/>
         <button on:click={addTask}>submit</button>
     </div>
     <ul class="list">
-        {#each tasks as task, index}
-            <li class="list-item">
+        {#each tasks as task, index (index)}
+            <li transition:fade animate:flip class="list-item">
              <div class="wrap">
                 <span>{task.inputValue}</span>
                 <span><Timer index={index} on:message={handleMessage}/></span>

@@ -16,7 +16,6 @@
 </script>
 <span>
    {Math.floor((countdownTime % 3600) / 60) > 0
-      ? `${Math.floor((countdownTime % 3600) / 60)}:`
-      : ""}
-    {countdownTime % 60 > 0 ? `${countdownTime % 60}`.padStart(2, 0) : ""}
+      ? `${Math.floor((countdownTime % 3600) / 60)}:`:""}
+    {countdownTime % 60 > 0 ? `${countdownTime % 60}`.padStart(2, 0):""}
 </span>
