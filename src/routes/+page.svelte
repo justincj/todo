@@ -1,8 +1,3 @@
-<!-- todo App: 
-form to add to the task.
-each li has a timer which countdown from t-60
-when it reaches zero task is eliminated whether you do it or not.
--->
 <script>
     import {flip} from "svelte/animate"
     import {fade} from "svelte/transition"
@@ -16,19 +11,13 @@ when it reaches zero task is eliminated whether you do it or not.
         }
     }
 
-    function destroy(){
-        alert("self destruct")
-        console.log('self destruct')
-        tasks = tasks.pop()
-        tasks = tasks;
-    }
     function addTask(){
-        tasks = [...tasks, {index:tasks.length, inputValue}]
+        tasks = [...tasks, {start:Date.now(), inputValue}]
         inputValue=""
     }
 
     function handleMessage(event){
-       tasks=tasks.filter(task=>task.index!=event.detail.index)
+       tasks=tasks.filter(task=>task.start!=event.detail.start)
        console.log(tasks)
     }
 </script>
@@ -43,12 +32,13 @@ when it reaches zero task is eliminated whether you do it or not.
         <button on:click={addTask}>submit</button>
     </div>
     <ul class="list">
-        {#each tasks as task, index (index)}
-            <li transition:fade animate:flip class="list-item">
+        {#each tasks as task (task.start)}
+            <li class="list-item">
              <div class="wrap">
                 <span>{task.inputValue}</span>
-                <span><Timer index={index} on:message={handleMessage}/></span>
+                <span><Timer start={task.start} on:message={handleMessage}/></span>
              </div>
+             </li>
         {/each}
     </ul>
     </main>

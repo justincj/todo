@@ -1,6 +1,6 @@
 <script>
     import { createEventDispatcher } from "svelte";
-    export let index;
+    export let start;
     const dispatch = createEventDispatcher()
     
   let countdownTime = 10; // 1 hour in seconds
@@ -9,7 +9,7 @@
   const countdownInterval = setInterval(() => {
     countdownTime--;
     if (countdownTime < 0) {
-      dispatch('message', {index:index} );
+      dispatch('message', {start} );
       clearInterval(countdownInterval);
     }
   }, 1000);
