@@ -3,6 +3,7 @@
     import Timer from "$lib/components/Timer.svelte"
     let tasks = [];
     let inputValue;
+    let checked=false;
     function handleKeyDown(e){
         if(e.key=="Enter"){
             addTask()
@@ -10,6 +11,9 @@
     }
 
     function addTask(){
+        if(!inputValue){
+            return;
+        }
         tasks = [...tasks, {start:Date.now(), inputValue}]
         inputValue=""
     }
@@ -17,6 +21,10 @@
     function handleMessage(event){
        tasks=tasks.filter(task=>task.start!=event.detail.start)
        console.log(tasks)
+    }
+
+    function removeTask(start){
+        tasks = tasks.filter(task=>task.start != start);
     }
 </script>
 <div class="container">
@@ -32,6 +40,7 @@
     <ul class="list">
         {#each tasks as task (task.start)}
             <li class="list-item">
+                <input type="checkbox" on:change={()=>removeTask(task.start)} bind:value={checked}/>
                 <span>{task.inputValue.trim()} </span>
                 <span>  <Timer start={task.start} on:message={handleMessage}/></span>
              </li>
